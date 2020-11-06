@@ -6,7 +6,7 @@ const router = new Router();
  * Welcome message
  * @route GET /
  */
-router.all("/", async function (ctx, next) {
+router.all("/", async (ctx, next) => {
         ctx.response.body = {
             "message": "Koa TypeScript Starter Project Running...",
             "author": "https://github.com/Kiyo5hi",

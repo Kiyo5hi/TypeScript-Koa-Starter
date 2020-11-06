@@ -37,7 +37,7 @@ router.post("/", async function (ctx, next) {
  * Get a user document by email
  * @route GET /user
  */
-router.get("/", async function (ctx, next) {
+router.get("/", async (ctx, next) => {
     let user = ctx.request.body as UserDocument;
 
     await validateHelper(user, ctx);
@@ -54,9 +54,10 @@ router.get("/", async function (ctx, next) {
  * Get multiple users at once
  * @route Get /users
  */
-router.get("s", async function (ctx, next) {
+router.get("s", async (ctx, next) => {
     ctx.response.body = "To Be Done";
     //TODO: get multiple users and display them by pages
+    await next();
 });
 
 
@@ -64,7 +65,7 @@ router.get("s", async function (ctx, next) {
  * Delete a user document by email
  * @route DELETE /user
  */
-router.delete("/", async function (ctx, next) {
+router.delete("/", async (ctx, next) => {
     const user = ctx.request.body as UserDocument;
 
     await validateHelper(user, ctx);
@@ -74,7 +75,7 @@ router.delete("/", async function (ctx, next) {
     await next();
 });
 
-async function validateHelper(user: UserDocument, ctx: Context) {
+const validateHelper = async function (user: UserDocument, ctx: Context) {
     try {
         await Joi.object({
             email: Joi.string().email().required()
@@ -82,6 +83,6 @@ async function validateHelper(user: UserDocument, ctx: Context) {
     } catch (err) {
         ctx.throw(err, 422);
     }
-}
+};
 
 export {router as userRouter};

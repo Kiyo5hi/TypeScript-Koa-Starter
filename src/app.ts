@@ -32,7 +32,7 @@ app.keys = [SESSION_SECRET];
 
 app.use(
     bodyParser({
-        onerror: function (err, ctx) {
+        onerror: (err, ctx) => {
             ctx.throw("JSON format error", 422);
         },
     })
