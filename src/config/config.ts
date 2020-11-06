@@ -1,4 +1,5 @@
 import session from "koa-session";
+import {ConnectionOptions} from "mongoose";
 
 export const SESSION_CONFIG: Partial<session.opts> = {
     key: "session", /** (string) cookie key (default is koa.sess) */
@@ -19,4 +20,11 @@ export const SESSION_CONFIG: Partial<session.opts> = {
     secure: true,
     /** (boolean) secure cookie*/
     sameSite: null, /** (string) session cookie sameSite options (default null, don't set it) */
+};
+
+export const MONGO_CONFIG: ConnectionOptions = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true
 };
