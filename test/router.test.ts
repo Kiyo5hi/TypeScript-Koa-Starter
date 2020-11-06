@@ -1,6 +1,10 @@
 import request from "supertest";
 import server from "../src/server";
 
+afterAll(function () {
+    server.close();
+});
+
 describe("GET /", function () {
     it("should return 200 OK", function (done) {
         request(server).get("/").expect(200, done);
