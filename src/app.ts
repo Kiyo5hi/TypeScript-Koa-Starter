@@ -16,7 +16,12 @@ app.keys = [SESSION_SECRET];
 // Connect to MongoDB
 (async function () {
     try {
-        await mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+        await mongoose.connect(MONGODB_URI, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true,
+            useFindAndModify: true
+        });
         /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
         console.log("MongoDB connected successfully.");
     } catch (err) {
