@@ -9,7 +9,7 @@ const router = new Router();
 router.all("/", async function (ctx, next) {
         ctx.response.body = {
             "message": "Koa TypeScript Starter Project Running...",
-            "author": "Kiyo5hi",
+            "author": "https://github.com/Kiyo5hi",
             "GitHub Repo": "https://github.com/Kiyo5hi/TypeScript-Koa-Starter"
         };
         await next();

@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/Kiyo5hi/TypeScript-Koa-Starter"
   },
-  "author": "Kiyo5hi",
+  "author": "https://github.com/Kiyo5hi",
   "license": "MIT",
   "scripts": {
     "build": "npm run build-ts && npm run lint",
