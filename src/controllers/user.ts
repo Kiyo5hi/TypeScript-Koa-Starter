@@ -40,13 +40,7 @@ router.post("/", async function (ctx, next) {
 router.get("/", async function (ctx, next) {
     let user = ctx.request.body as UserDocument;
 
-    try {
-        await Joi.object({
-            email: Joi.string().email().required()
-        }).validateAsync(user);
-    } catch (err) {
-        ctx.throw(err, 422);
-    }
+    await validateHelper(user, ctx);
 
     user = await User.findOne({email: user.email}).select("-password");
     if (!user) ctx.throw("User not found", 404);
@@ -73,6 +67,14 @@ router.get("s", async function (ctx, next) {
 router.delete("/", async function (ctx, next) {
     const user = ctx.request.body as UserDocument;
 
+    await validateHelper(user, ctx);
+    await User.findOneAndRemove({email: user.email});
+    ctx.response.status = 204;
+
+    await next();
+});
+
+async function validateHelper(user: UserDocument, ctx: Context) {
     try {
         await Joi.object({
             email: Joi.string().email().required()
@@ -80,15 +82,6 @@ router.delete("/", async function (ctx, next) {
     } catch (err) {
         ctx.throw(err, 422);
     }
-
-    try {
-        await User.findOneAndRemove({email: user.email});
-        ctx.response.status = 204;
-    } catch (err) {
-        ctx.throw("User not found", 404);
-    }
-
-    await next();
-});
+}
 
 export {router as userRouter};
